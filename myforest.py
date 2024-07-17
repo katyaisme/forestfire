@@ -12,7 +12,7 @@ plt.rcParams['font.size'] = 15
 
 #0 is burnt, 1 is tree, 2 is fire
 
-class arr:
+class forest:
     
     @classmethod
     def makegrid(cls, gridsize, startgr, draw):
@@ -119,7 +119,7 @@ class arr:
                 continue
         return neighbours
             
-test = arr.makegrid(200, 10, False)
+test = forest.makegrid(200, 10, False)
 
 runcount = 50
 countarray = np.zeros(shape=(3,runcount))
