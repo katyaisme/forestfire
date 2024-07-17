@@ -119,7 +119,7 @@ class forest:
                 continue
         return neighbours
             
-test = forest.makegrid(200, 10, False)
+test = forest.makegrid(200, 10, True)
 
 runcount = 50
 countarray = np.zeros(shape=(3,runcount))
