@@ -59,7 +59,7 @@ class forest:
             self.board_img.set_data(self.array)
             
             self.fig.canvas.draw()
-            plt.pause(0.5)
+            plt.pause(0.1)
         
         self.getpos()
         self.getcounts()
@@ -92,19 +92,21 @@ class forest:
         
     def ignite(self, ignitprob): #rule 3, needs new tree positions
         p_ig = [1-ignitprob, ignitprob]
-        for i in self.treespos:
-            new = np.random.choice([1, 2],
-                                   1,
-                                   p=p_ig)
-            self.array[i] = new
+        new = np.random.choice([1, 2],
+                                self.treeno,
+                                p=p_ig)
+        for i in np.arange(0,self.treeno):
+            pos = self.treespos[i]
+            self.array[pos] = new[i]
         
     def grow(self, growthprob): #rule 4, needs starting burn positions
         p_gr = [1-growthprob, growthprob]
-        for i in self.burnspos:
-            new = np.random.choice([0, 1],
-                                   1,
-                                   p=p_gr)
-            self.array[i] = new
+        new = np.random.choice([0, 1],
+                               self.burntno,
+                               p=p_gr)
+        for i in np.arange(0,self.burntno):
+            pos = self.burnspos[i]
+            self.array[pos] = new[i]
             
     def getneighbourhood(self, r, c):
         neighbours = []
@@ -131,6 +133,7 @@ for i in np.arange(0,runcount):
         test.grow(0.1)
         
         test.getpos() #new positions needed to avoid resetting propagation
+        test.getcounts()
         test.ignite(0.001)
         
         test.update()
